@@ -2,9 +2,8 @@ name: Build WAR with Gradle
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
   workflow_dispatch:  # 수동 실행 옵션
 
 jobs:
