@@ -1,0 +1,36 @@
+name: Build WAR with Gradle
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # 수동 실행 옵션
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'  # 프로젝트에 맞는 자바 버전 선택
+        distribution: 'temurin'
+        
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+    
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+      
+    - name: Build with Gradle
+      run: ./gradlew build
+      
+    - name: Upload WAR as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: application
+        path: build/libs/*.war  # Gradle의 WAR 파일 위치
