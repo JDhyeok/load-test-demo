@@ -2,17 +2,16 @@ name: AWS Lambda invoke 테스트
 
 on:
   push:
-    - main
-  paths-ignore:
-    - '.github/**'
+    branches:
+      - main
   workflow_dispatch:
 
 env:
   AWS_REGION: ap-northeast-2
 
-  permissions:
-    id-token: write
-    contents: read
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   build:
